@@ -31,11 +31,7 @@ int main(int argc, const char *argv[]){
   string outputName = argv[2]; //get filename
 
   string line = "";
-  int choice;
   ifstream input(inputName); //create input stream
-  ofstream output(outputName); //create output stream
-
-
   /*if (input.is_open()) //runs to load in all the data from the input data
   {
       for (int i =0; getline(input,line); i++)//add in file
@@ -55,20 +51,24 @@ int main(int argc, const char *argv[]){
       }
       input.close(); //close file
   }
-*/
-while (choice) {
-    /* code */
-}
+  */
+
+
+  int choice;
+while (choice !=4) //MENU LOOP
+{
   displayMenu();
   cin >> choice;
-  if (choice = 1)
+
+  if (choice == 1)
   { //if view celestial data
   cout << "user called view celestial data!"<< endl;
 
   }
 
-  if (choice = 2)
+  if (choice == 2)
   { //if adding a new log
+   ofstream output(outputName, fstream::app); //create output stream, appending to
     if (output.is_open())
     {
       string newlog = ""; //take in date, and the whole log, add to the output file
@@ -79,30 +79,36 @@ while (choice) {
       { //borrowed from hw 5 -april
          getline(cin, newdate);
       }
+      output << "Log entry: " << newdate <<  "\n";
+
       cout << "Please enter your log"<< endl;
       while(newlog.empty())
       {
          getline(cin, newlog);
       }
-      output << newdate;
-      output << "/n"; //create new line hopefully
-      output << newlog;
-      cout << "log added!" << endl;
+      output << newlog << "\n"; //create new line hopefully
+      output << "+---------------------------------------------------------------------------------------------+" << "\n";
+      cout << "Log added!" << endl;
+      cout << "+-----------------------+" << endl;
+      output.close();//need to work for some dumb reason
   }
 
   }
-  if (choice = 3)
+  if (choice == 3)
   { //if view night sky
   cout << "user called night sky function!"<< endl;
 
   }
 
-  if (choice = 4)
+  if (choice == 4)
   { //if exiting
     cout << "Goodbye!" << endl;
       return 0;
   }
+  if(choice != 1 && choice != 2 && choice != 3 && choice != 4){
+      return 0;
+  }
 
-
+}
   return 0; //exit
 }
