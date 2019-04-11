@@ -1,4 +1,4 @@
-//April Ott, data structures, HW 1
+//April Ott, Final project data structures
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -27,12 +27,16 @@ void displayMenu()
 
 int main(int argc, const char *argv[]){
 
-  string fileName = argv[1]; //get filename
-  string line;
-  int choice;
-  ifstream input(fileName); //create input stream
+  string inputName = argv[1]; //get filename
+  string outputName = argv[2]; //get filename
 
-  /*if (input.is_open())
+  string line = "";
+  int choice;
+  ifstream input(inputName); //create input stream
+  ofstream output(outputName); //create output stream
+
+
+  /*if (input.is_open()) //runs to load in all the data from the input data
   {
       for (int i =0; getline(input,line); i++)//add in file
       { //while getline is applicable, load in the values
@@ -52,19 +56,49 @@ int main(int argc, const char *argv[]){
       input.close(); //close file
   }
 */
-
+while (choice) {
+    /* code */
+}
   displayMenu();
   cin >> choice;
-  if (choice = 1) { //if view celestial data
-      /* code */
+  if (choice = 1)
+  { //if view celestial data
+  cout << "user called view celestial data!"<< endl;
+
   }
-  if (choice = 2) { //if view celestial data
-      /* code */
+
+  if (choice = 2)
+  { //if adding a new log
+    if (output.is_open())
+    {
+      string newlog = ""; //take in date, and the whole log, add to the output file
+      string newdate = "";
+
+      cout << "Please enter the date of your new log"<< endl;
+      while(newdate.empty())
+      { //borrowed from hw 5 -april
+         getline(cin, newdate);
+      }
+      cout << "Please enter your log"<< endl;
+      while(newlog.empty())
+      {
+         getline(cin, newlog);
+      }
+      output << newdate;
+      output << "/n"; //create new line hopefully
+      output << newlog;
+      cout << "log added!" << endl;
   }
-  if (choice = 3) { //if view celestial data
-      /* code */
+
   }
-  if (choice = 4) { //if view celestial data
+  if (choice = 3)
+  { //if view night sky
+  cout << "user called night sky function!"<< endl;
+
+  }
+
+  if (choice = 4)
+  { //if exiting
     cout << "Goodbye!" << endl;
       return 0;
   }
