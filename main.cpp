@@ -6,9 +6,54 @@
 #include <string>
 #include <vector>
 #include <iomanip>
-
-
 using namespace std;
+
+
+void display_planet(string name)
+{
+    cout << "display planet called, 14"<<endl;
+    ifstream input_celestial("planet_data.csv"); //create input stream
+    string whole_line = "";
+    string temp;
+    string word;
+    vector <string> row;
+    int count=0;
+
+    if (input_celestial>>temp) {
+        row.clear(); //clear the std::vector<int> v;
+        getline(input_celestial,whole_line);
+        stringstream ss(whole_line);
+
+        while (getline(ss,word,',')) {
+            cout << "got here " << "word is"<<word<< endl;
+
+            row.push_back(word); //push to vector
+        }
+        if (name== row[0]) { //check names
+      count = 1;
+      cout << "Planet Details " << " : \n";
+      cout << "Name: " << row[0] << "\n";
+      cout << "Radius in km: " << row[1] << "\n";
+      cout << "Distance from the sun(km): " << row[4] << "\n";
+      cout << "Orbital tilt: " << row[6] << "\n";
+      cout << "Rotational period: " << row[10] << "\n";
+      cout << "Orbit period: " << row[12] << "\n";
+      return;
+        }
+    }
+    if(count == 0){
+        cout << "Planet not found" << endl;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 void displayMenu()
 {
@@ -54,7 +99,7 @@ int main(int argc, const char *argv[]){
   */
 
 
-  int choice;
+int choice;
 while (choice !=4) //MENU LOOP
 {
   displayMenu();
@@ -63,6 +108,12 @@ while (choice !=4) //MENU LOOP
   if (choice == 1)
   { //if view celestial data
   cout << "user called view celestial data!"<< endl;
+  //ifstream input_celestial("planet_data.csv"); //create input stream
+  string celestial_choice = "";
+  cout << "Please enter the planet's name"<<endl;
+  cin >> celestial_choice;
+  display_planet(celestial_choice); //call the search and print function
+
 
   }
 
