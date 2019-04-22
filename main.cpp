@@ -1,7 +1,7 @@
-//April Ott, Final project data structures
+//April Ott, Kiley Kimble, Nathan Reed Final project data structures
 //currently complete: display planet function
 
-//g++ -std=c+=11 main.cpp -o a
+//g++ -std=c++11 main.cpp -o a
 //./a log.txt planet_data.txt
 
 
@@ -14,10 +14,11 @@
 #include <vector>
 #include <iomanip>
 #include "structs.hpp"
+#include<bits/stdc++.h>
 using namespace std;
 
 
-void display_planet(string name) //by april<3
+void display_planet(string name) //
 {
 //    cout << "display planet called, 14"<<endl;
     fstream input_celestial;
@@ -37,6 +38,12 @@ void display_planet(string name) //by april<3
         getline(input_celestial,whole_line);
         memory.push_back(temp);
         stringstream ss(temp); //call a stringstream on inputted line
+
+        std::vector<string>::iterator it;
+        it = std::find(memory.begin(),memory.end(),name); //use find funtion on the memory vector
+        if (it !=memory.end()) {
+            stringstream s(temp); //if found in overal memory, output
+        }
 
         while(getline(ss,word,',')){ //while in the line, push each word to vector
             row.push_back(word); //push to vector
@@ -67,7 +74,7 @@ void display_planet(string name) //by april<3
     }
 }
 
-void load_logs(vector <Log> all_logs) //by april<3. Loads in every log in the csv file and stores it in a vector of log structs
+void load_logs(vector <Log> all_logs) //. Loads in every log in the csv file and stores it in a vector of log structs
 {
     fstream input_logs;
     string temp_load;
@@ -133,7 +140,7 @@ int main(int argc, const char *argv[]){
   ifstream input(inputName); //create input stream
 
   vector <Log> all_logs; //temp for each row
-  load_logs(all_logs);
+  //load_logs(all_logs);
 
 
 
@@ -146,7 +153,7 @@ while (choice !=4) //MENU LOOP
   if (choice == 1)
   { //if view celestial data
   string celestial_choice = "";
-  cout << "Please enter the planet's name"<<endl;
+  cout << "Please enter the planet's name, currently stored are the Sun, Mercury,Venus,Earth,Mars,Jupiter,Uranus and Neptune"<<endl;
   cin >> celestial_choice;
   display_planet(celestial_choice); //call the search and print function
   }
@@ -156,26 +163,41 @@ while (choice !=4) //MENU LOOP
    ofstream output(outputName, fstream::app); //create output stream, appending to
     if (output.is_open())
     {
-      string newlog = ""; //take in date, and the whole log, add to the output file
+      string new_data = ""; //take in date, and the whole log, add to the output file
       string newdate = "";
+      string newtitle = "";
 
-      cout << "Please enter the date of your new log"<< endl;
+      cout << "Please enter the date of your new log (mm,dd,yy)"<< endl;
       while(newdate.empty())
       { //borrowed from hw 5 -april
          getline(cin, newdate);
       }
-      output << "Log entry: " << newdate <<  "\n";
+      output << "Log entry: " << newdate <<  "\n"; //output to the output file 
+      cout << "Please enter the title of your new log"<< endl;
+      while(newtitle.empty())
+      { //borrowed from hw 5 -april
+         getline(cin, newtitle);
+      }
+      output << "Title: " << newtitle <<  "\n";
 
       cout << "Please enter your log"<< endl;
-      while(newlog.empty())
+      while(new_data.empty())
       {
-         getline(cin, newlog);
+         getline(cin, new_data);
       }
-      output << newlog << "\n"; //create new line hopefully
-      output << "+---------------------------------------------------------------------------------------------+" << "\n";
+      output << new_data << "\n"; //create new line hopefully
+      output << "+---------------------------------------------------------------------------------------------+" << endl;;
+      cout << "+-----------------------+" << endl;
       cout << "Log added!" << endl;
       cout << "+-----------------------+" << endl;
-      output.close();//need to work for some dumb reason
+
+      Log newlog;
+      newlog.title=newtitle; //load data into a new struct then push it to the vector that holds all the logs.
+      newlog.date=newdate;
+      newlog.all_data = new_data;
+      all_logs.push_back(newlog);
+
+      output.close();//needed to work
   }
 
   }

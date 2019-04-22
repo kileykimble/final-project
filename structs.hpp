@@ -16,6 +16,6 @@ using namespace std;
 struct Log
 {
   string date;
-  string title; // Title of the movie
-  string all_data;          // Year this movie was released
+  string title; // just a simple struct to hold each log
+  string all_data;
 };
