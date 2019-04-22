@@ -153,7 +153,8 @@ while (choice !=4) //MENU LOOP
   if (choice == 1)
   { //if view celestial data
   string celestial_choice = "";
-  cout << "Please enter the planet's name, currently stored are the Sun, Mercury,Venus,Earth,Mars,Jupiter,Uranus and Neptune"<<endl;
+  cout << "Please enter the planet's name, currently stored are:" << endl;
+  cout<< "The Sun, Mercury, Venus, Earth, Mars, Jupiter, Uranus and Neptune"<<endl;
   cin >> celestial_choice;
   display_planet(celestial_choice); //call the search and print function
   }
@@ -172,7 +173,7 @@ while (choice !=4) //MENU LOOP
       { //borrowed from hw 5 -april
          getline(cin, newdate);
       }
-      output << "Log entry: " << newdate <<  "\n"; //output to the output file 
+      output << "Log entry date: " << newdate <<  "\n"; //output to the output file
       cout << "Please enter the title of your new log"<< endl;
       while(newtitle.empty())
       { //borrowed from hw 5 -april
@@ -185,7 +186,8 @@ while (choice !=4) //MENU LOOP
       {
          getline(cin, new_data);
       }
-      output << new_data << "\n"; //create new line hopefully
+
+      output <<"Data: "<< new_data << "\n"; //create new line hopefully
       output << "+---------------------------------------------------------------------------------------------+" << endl;;
       cout << "+-----------------------+" << endl;
       cout << "Log added!" << endl;
