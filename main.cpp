@@ -1,4 +1,11 @@
 //April Ott, Final project data structures
+//currently complete: display planet function
+
+//g++ -std=c+=11 main.cpp -o a
+//./a log.txt planet_data.txt
+
+
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -6,10 +13,11 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include "structs.hpp"
 using namespace std;
 
 
-void display_planet(string name)
+void display_planet(string name) //by april<3
 {
 //    cout << "display planet called, 14"<<endl;
     fstream input_celestial;
@@ -18,7 +26,8 @@ void display_planet(string name)
     string whole_line = "";
     string temp;
     string word = "";
-    vector <string> row;
+    vector <string> row; //temp for each row
+    vector <string> memory; //holds all the data
     int count=0;
     bool found = false;
 
@@ -26,6 +35,7 @@ void display_planet(string name)
         //cout << "temp is : " << temp << endl;
         row.clear(); //clear the std::vector<int> v;
         getline(input_celestial,whole_line);
+        memory.push_back(temp);
         stringstream ss(temp); //call a stringstream on inputted line
 
         while(getline(ss,word,',')){ //while in the line, push each word to vector
@@ -57,6 +67,48 @@ void display_planet(string name)
     }
 }
 
+void load_logs(vector <Log> all_logs) //by april<3. Loads in every log in the csv file and stores it in a vector of log structs
+{
+    fstream input_logs;
+    string temp_load;
+    input_logs.open("log.csv",ios::in); //create input stream
+
+    string input_date;
+    string input_title; //to load into the struct
+    string input_data;
+    string word;
+    int iterator=0; //janky but idk
+    struct Log newlog;
+
+    while (input_logs >> temp_load) { //while active
+
+        stringstream ss(temp_load); //call a stringstream on inputted line
+
+        while(getline(ss,word,',')){ //while in the line, push each word to vector
+            if (iterator==0) {
+                newlog.date = word;
+                cout << "date inputted is : " << word << endl;
+            }
+            if (iterator==1) {
+                newlog.title = word;
+                cout << "title inputted is : " << word << endl;
+            }
+            if (iterator==2) {
+                newlog.all_data = word;
+                cout << "data inputted is : " << word << endl;
+            }
+            if (iterator==3) {
+                all_logs.push_back(newlog); //push to vector
+                cout << "pushed"<<endl;
+                iterator=0;
+            }
+            iterator++;
+        //    cout << "got here " << "word is: "<<word<< endl;
+        }
+
+    }
+}
+
 
 void displayMenu()
 {
@@ -77,29 +129,12 @@ int main(int argc, const char *argv[]){
 
   string inputName = argv[1]; //get filename
   string outputName = argv[2]; //get filename
-
   string line = "";
   ifstream input(inputName); //create input stream
-  /*if (input.is_open()) //runs to load in all the data from the input data
-  {
-      for (int i =0; getline(input,line); i++)//add in file
-      { //while getline is applicable, load in the values
-        insertIntoSortedArray(myArray, i, stoi(line)); //call the insert function with each number.
 
-        for(int x=0; x<=i;x++) //for printing each number added
-        {
-          if(x == i)
-          {
-          cout <<myArray[x]; //cout the values
-          }
-          else
-            cout << myArray[x] << ",";
-        }
-        cout << endl;
-      }
-      input.close(); //close file
-  }
-  */
+  vector <Log> all_logs; //temp for each row
+  load_logs(all_logs);
+
 
 
 int choice;
@@ -110,14 +145,10 @@ while (choice !=4) //MENU LOOP
 
   if (choice == 1)
   { //if view celestial data
-  //cout << "user called view celestial data!"<< endl;
-  //ifstream input_celestial("planet_data.csv"); //create input stream
   string celestial_choice = "";
   cout << "Please enter the planet's name"<<endl;
   cin >> celestial_choice;
   display_planet(celestial_choice); //call the search and print function
-
-
   }
 
   if (choice == 2)
