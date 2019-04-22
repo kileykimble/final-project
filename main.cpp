@@ -11,48 +11,51 @@ using namespace std;
 
 void display_planet(string name)
 {
-    cout << "display planet called, 14"<<endl;
-    ifstream input_celestial("planet_data.csv"); //create input stream
+//    cout << "display planet called, 14"<<endl;
+    fstream input_celestial;
+    input_celestial.open("planet_data.csv",ios::in); //create input stream
+
     string whole_line = "";
     string temp;
-    string word;
+    string word = "";
     vector <string> row;
     int count=0;
+    bool found = false;
 
-    if (input_celestial>>temp) {
+    while (input_celestial >> temp) {
+        //cout << "temp is : " << temp << endl;
         row.clear(); //clear the std::vector<int> v;
         getline(input_celestial,whole_line);
-        stringstream ss(whole_line);
+        stringstream ss(temp); //call a stringstream on inputted line
 
-        while (getline(ss,word,',')) {
-            cout << "got here " << "word is"<<word<< endl;
-
+        while(getline(ss,word,',')){ //while in the line, push each word to vector
             row.push_back(word); //push to vector
+        //    cout << "got here " << "word is: "<<word<< endl;
         }
-        if (name== row[0]) { //check names
-      count = 1;
-      cout << "Planet Details " << " : \n";
-      cout << "Name: " << row[0] << "\n";
-      cout << "Radius in km: " << row[1] << "\n";
-      cout << "Distance from the sun(km): " << row[4] << "\n";
-      cout << "Orbital tilt: " << row[6] << "\n";
-      cout << "Rotational period: " << row[10] << "\n";
-      cout << "Orbit period: " << row[12] << "\n";
-      return;
+
+        if (name == row[0]) { //check names. comparing 1st index of vector
+            found = true;
+            cout << "!-------------------------------!" <<endl;
+            cout << "Planet Details: " << " \n";
+            cout << "Name: " << row[0] << "\n";
+            cout << "Radius in km: " << row[1] << "\n";
+            cout << "Distance from the sun(km): " << row[4] << "\n";
+            cout << "Orbital tilt: " << row[6] << "\n";
+            cout << "Rotational period: " << row[10] << "\n";
+            cout << "Orbit period: " << row[11] << "\n";
+            cout << "!-------------------------------!" <<endl;
+            return;
         }
+        else{
+        //    cout << "not found in this line, looping"<< endl;
+            continue; //loop if not found
+        }
+
     }
-    if(count == 0){
+    if(found == false){ //at end of file, call this if its not there
         cout << "Planet not found" << endl;
     }
 }
-
-
-
-
-
-
-
-
 
 
 void displayMenu()
@@ -107,7 +110,7 @@ while (choice !=4) //MENU LOOP
 
   if (choice == 1)
   { //if view celestial data
-  cout << "user called view celestial data!"<< endl;
+  //cout << "user called view celestial data!"<< endl;
   //ifstream input_celestial("planet_data.csv"); //create input stream
   string celestial_choice = "";
   cout << "Please enter the planet's name"<<endl;
