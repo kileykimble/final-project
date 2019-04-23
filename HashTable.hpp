@@ -4,12 +4,19 @@
 #include <string>
 
 // struct to store word + count combinations
-struct wordItem
+struct planet
 {
-    std::string word;
-    int count;
-    wordItem* next;
+    string name;
+    string radius; //in km
+    string distance; //from sun
+    string orbit_tilt;
+    string rotat_period;
+    string orbit_period;
+    string moons;
+
+    planet* next;
 };
+
 
 
 /* class HashTable for storing words.
@@ -24,13 +31,8 @@ class HashTable {
   public:
     HashTable(int hashTableSize);
     ~HashTable();
-    void addWord(std::string word);
+    void addPlanet(planet newplanet);
     bool isInTable(std::string word);
-    void incrementCount(std::string word);
-    void printTopN(int n);
-    int getNumCollisions();
-    int getNumItems();
-    int getTotalNumWords();
 
   private:
     /* member functions */

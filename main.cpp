@@ -14,6 +14,7 @@
 #include <vector>
 #include <iomanip>
 #include "structs.hpp"
+#include "HashTable.hpp"
 #include<bits/stdc++.h>
 using namespace std;
 

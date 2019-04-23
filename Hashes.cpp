@@ -33,32 +33,14 @@ HashTable::HashTable(int hashTableSize){
 
 
 HashTable::~HashTable(){ //delete all
- wordItem* temp;
-  wordItem* next;
-
-  for (int i = 0; i < hashTableSize; i++) { //delete each slot
-    temp = hashTable[i];
-    while (temp!=NULL) {
-      next = temp->next;
-      delete temp;
-      temp = next;
-    }
-  }
-   delete[] hashTable; //delete hash table
-   if (hashTable == NULL) {
-      cout << "deleted" << endl;
-   }
-   else{
-       cout << "fail" << endl;
-   }
 }
 
 
-void HashTable::addWord(std::string word){
-  int index = getHash(word);
-  wordItem* spot = hashTable[index]; //start at the head
-  wordItem* temp = new wordItem;
-  wordItem* prev = NULL;
+void HashTable::addPlanet(planet newplanet){
+  int index = getHash(newplanet.name);
+  Planet* spot = hashTable[index]; //start at the head
+  Planet* temp = new planet;
+  Planet* prev = NULL;
   numItems++;
 
 
@@ -72,8 +54,6 @@ void HashTable::addWord(std::string word){
   }
 
   if (spot == NULL) { //when its empty
-    temp->word = word; //load in the data
-    temp->count =1;
     if (prev == NULL)
     { //if it needs to be first on the list
       hashTable[index] = temp;
