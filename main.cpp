@@ -144,7 +144,7 @@ int main(int argc, const char *argv[]){
   //load_logs(all_logs);
 
   table.load_planets(inputName); //load in stuff
-
+//test push?
 
 
 int choice;
