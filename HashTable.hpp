@@ -36,12 +36,13 @@ class HashTable {
     bool isInTable(std::string word);
     void load_planets(string input);
     void planet_search(string name);
-    
+    void view_index(string name);
+
 
   private:
     /* member functions */
     unsigned int getHash(std::string word);
-    planet* searchTable(std::string word);
+    planet* searchTable(std::string word,int index);
 
     /* instance variables */
     planet** hashTable;

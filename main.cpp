@@ -161,8 +161,8 @@ while (choice !=4) //MENU LOOP
   cin >> celestial_choice;
  // display_planet(celestial_choice); //call the search and print function
     planet *temp;
-    display_planet(celestial_choice);
-    //table.planet_search(celestial_choice);
+    //display_planet(celestial_choice);
+    table.planet_search(celestial_choice);
   }
 
   if (choice == 2)

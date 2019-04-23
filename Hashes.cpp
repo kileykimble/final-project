@@ -59,8 +59,9 @@ void HashTable::addPlanet(planet *newplanet){
     { //if it needs to be first on the list
 
       hashTable[index] = newplanet;
-      //cout << "added planet to index: "<< index <<" name: " << newplanet->name << endl;
-
+//      cout << "added planet to index: "<< index <<" name: " << newplanet->name << endl;
+    //  cout << "calling view index in add function" << endl;
+      view_index(newplanet->name);
       return;
     }
     prev->next = newplanet;
@@ -68,48 +69,68 @@ void HashTable::addPlanet(planet *newplanet){
 }
 
 
-planet* HashTable::searchTable(string word){ //word == name
+void HashTable::view_index(string name){
+
+
+
+    int index = getHash(name);
+   cout << "index in view index is "<< hashTable[index]->name<<" index is "<< index<< endl;
+}
+
+planet* HashTable::searchTable(string word,int index){ //word == name
 cout << "searching planet:  " << word << endl;
-int index = getHash("word");
+cout << "calling view index in search function" << endl;
+view_index(word);
+
+planet* temp;
 
   bool found = false;
   if (word == "Sun") {
       int index = getHash("Sun");
+     cout << "index name is "<< hashTable[index]->name<<" index is "<< index<< endl;
+     temp = hashTable[index];
+     cout<< "temp name now "<< temp->name << endl;
   }
   if (word == "Mercury") {
       int index = getHash("Mercury");
+      temp = hashTable[index];
   }
   if (word == "Venus") {
       int index = getHash("Venus");
+      temp = hashTable[index];
   }
   if (word == "Earth") {
       int index = getHash("Earth");
+      temp = hashTable[index];
   }
   if (word == "Mars") {
       int index = getHash("Mars");
+      temp = hashTable[index];
   }
   if (word == "Jupiter") {
       int index = getHash("Jupiter");
+      temp = hashTable[index];
   }
   if (word == "Saturn") {
       int index = getHash("Saturn");
+      temp = hashTable[index];
   }
   if (word == "Uranus") {
       int index = getHash("Uranus");
+      temp = hashTable[index];
   }
   if (word == "Neptune") {
       int index = getHash("Neptune");
+      temp = hashTable[index];
   }
 
 
- // cout << "22222 name at index is " << (hashTable[index])->name << endl;
-  planet* temp;
-  temp = hashTable[index];
+ //cout << "22222 name at index is " << (hashTable[index])->name << endl;
+
  // cout << "name at index is " << (hashTable[index])->name << endl;
  // cout << "temps name is " << temp->name << endl;
   //cout << "search hash calculated is: " << index << endl;
 
-  while (temp != NULL) {
     if (temp->name == word) {
         found = true;
         cout << "!-------------------------------!" <<endl;
@@ -126,7 +147,7 @@ int index = getHash("word");
     else{
       temp=temp->next;
     }
-  }
+
   if (found == false) {
       cout << "Planet not found." << endl;
         return NULL;
@@ -135,7 +156,10 @@ int index = getHash("word");
 
 }
 void HashTable::planet_search(string name){
-    planet *temp = searchTable(name);
+     int index = getHash(name);
+     view_index(name);
+     cout << "from search function part 1" << endl;
+     searchTable(name,index);
     //cout << "temp name 111 is " << temp->name;
 }
 
@@ -170,10 +194,13 @@ void HashTable::load_planets(string input)
              tempP->orbit_tilt = row[6];
              tempP->rotat_period = row[10];
              tempP->orbit_period = row[11];
-             addPlanet(tempP); //call add funtion'
              int index = getHash(tempP->name);
+             addPlanet(tempP); //call add funtion'
 
-             //cout << "name at loaded index is " << (hashTable[index])->name << endl;
+             cout << "calling view index" << endl;
+             view_index(tempP->name);
+             row.clear();
+
 
         }
         return;
