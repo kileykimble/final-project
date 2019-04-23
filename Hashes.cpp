@@ -58,86 +58,10 @@ void HashTable::addPlanet(planet *newplanet){
       hashTable[index] = newplanet;
       return;
     }
-    prev->next = temp;
+    prev->next = newplanet;
   }
 }
 
-
-
-  void getStopWords(char *ignoreWordFileName, HashTable &stopWordsTable){
-
-      ifstream input(ignoreWordFileName); //start ifstream
-      string word = "";
-      while(getline(input,word)){
-        stopWordsTable.addWord(word);
-      }
-
-  }
-
-
-int HashTable::getNumCollisions(){
-  return numCollisions;
-}
-int HashTable::getNumItems(){
-  return numItems;
-
-}
-
-
-vector <wordItem> sorterHelper(vector <wordItem> n_list, int x){
-
-    wordItem temp;    //sort helper, iterate and sort the vector
-    for (int i = 0; i < x-1; i++) {
-        for (int j = 0; j < x-i-1; j++) {
-            if (n_list[j].count < n_list[j+1].count) { //comparator
-                temp = n_list[j];
-                n_list[j] = n_list[j+1];   //if values needs to switch
-                n_list[j+1] = temp;
-            }
-        }
-    }
-    return n_list;
-}
-
-
-void HashTable::printTopN(int n){
-
-    vector <wordItem> n_list; //create std::vector<int> v;
-    wordItem *temp = new wordItem;
-    temp->count = 1;
-    temp->next = NULL;
-    int counter = 0;
-
-    for (int i = 0; i < hashTableSize; i++) {
-        temp = hashTable[i]; //start at the beginning
-        while (temp!=NULL) { //while not at the end
-            n_list.push_back(*temp);
-            temp = temp->next;
-            counter++;
-        }
-    }
-
-    n_list = sorterHelper(n_list, counter); //call sorterHelper
-
-    for (int r = 0; r < n; r++) {
-       cout <<std::fixed << setprecision(4)<<(float)n_list[r].count/getTotalNumWords() << " - " << n_list[r].word << endl;
-    }
-}
-
-int HashTable::getTotalNumWords(){
-
-  int total = 0;
-  wordItem* temp;
-
-  for (int i = 0; i < hashTableSize; i++) {
-    temp = hashTable[i];
-    while (temp!=NULL) {
-      total = total + temp->count;
-      temp = temp->next;
-    }
-  }
-  return total;
-}
 
 planet* HashTable::searchTable(string word){ //word == name
 
@@ -162,7 +86,7 @@ planet* HashTable::searchTable(string word){ //word == name
       temp=temp->next;
     }
   }
-  cout << "Planet not found."
+  cout << "Planet not found." << endl;
     return NULL;
 }
 void HashTable::planet_search(string name){
@@ -173,7 +97,8 @@ void load_planets(string input)
 {
     cout << "Loading planets! .... .. . ." << endl;
     vector <string> row; //temp for each row
-    planet *temp = new planet;
+    planet *tempP = new planet;
+    string temp;
     fstream input_celestial;
     input_celestial.open("planet_data.csv",ios::in); //create input stream
 
@@ -190,13 +115,13 @@ void load_planets(string input)
             row.push_back(word); //push to vector
         //    cout << "got here " << "word is: "<<word<< endl;
         }
-             temp->name = row[0];
-             temp->radius = row[1]; //add in all the data
-             temp->distance = row[4];
-             temp->orbit_tilt = row[6];
-             temp->rotat_period = row[10];
-             temp->orbit_period = row[11];
-             HashTable::addPlanet(temp); //call add funtion
+             tempP->name = row[0];
+             tempP->radius = row[1]; //add in all the data
+             tempP->distance = row[4];
+             tempP->orbit_tilt = row[6];
+             tempP->rotat_period = row[10];
+             tempP->orbit_period = row[11];
+             HashTable::addPlanet(tempP); //call add funtion
         }
 }
 
@@ -215,34 +140,6 @@ bool HashTable::isInTable(string word){ //planets are indexed by name
   }
   return false;
 }
-
-void HashTable::incrementCount(string word){
-    wordItem *temp = searchTable(word);
-    while (temp !=NULL) {
-        if (temp->word == word) {
-            temp->count++; //add one
-        }
-        else{
-            temp=temp->next; //go to next
-        }
-    }
-
-}
-
-
-bool isStopWord(std::string word, HashTable &stopWordsTable){
-
-      if (stopWordsTable.isInTable(word)) {
-        return true;
-      }
-      else{
-       return false;
-     }
-}
-
-
-
-
 
 
 

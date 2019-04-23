@@ -2,6 +2,7 @@
 #define HW_7_HASH_TABLE
 //borrowed from hw 7, thanks TA's
 #include <string>
+using namespace std;
 
 // struct to store word + count combinations
 struct planet
@@ -31,7 +32,7 @@ class HashTable {
   public:
     HashTable(int hashTableSize);
     ~HashTable();
-    void addPlanet(planet newplanet);
+    void addPlanet(planet *newplanet);
     bool isInTable(std::string word);
     void load_planets(string input);
     void planet_search(string name);
