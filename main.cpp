@@ -139,9 +139,11 @@ int main(int argc, const char *argv[]){
   string outputName = argv[2]; //get filename
   string line = "";
   ifstream input(inputName); //create input stream
-
+  HashTable table(10);
   vector <Log> all_logs; //temp for each row
   //load_logs(all_logs);
+
+  table.load_planets(inputName); //load in stuff
 
 
 
@@ -157,7 +159,9 @@ while (choice !=4) //MENU LOOP
   cout << "Please enter the planet's name, currently stored are:" << endl;
   cout<< "The Sun, Mercury, Venus, Earth, Mars, Jupiter, Uranus and Neptune"<<endl;
   cin >> celestial_choice;
-  display_planet(celestial_choice); //call the search and print function
+ // display_planet(celestial_choice); //call the search and print function
+    planet *temp;
+    table.planet_search(celestial_choice);
   }
 
   if (choice == 2)
@@ -206,7 +210,8 @@ while (choice !=4) //MENU LOOP
   }
   if (choice == 3)
   { //if view night sky
-  cout << "user called night sky function!"<< endl;
+  cout << "Called night sky function!"<< endl;
+ // nightSkyCoordinates();
 
   }
 

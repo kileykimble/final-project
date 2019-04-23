@@ -1,6 +1,6 @@
 #ifndef HW_7_HASH_TABLE
 #define HW_7_HASH_TABLE
-
+//borrowed from hw 7, thanks TA's
 #include <string>
 
 // struct to store word + count combinations
@@ -33,14 +33,16 @@ class HashTable {
     ~HashTable();
     void addPlanet(planet newplanet);
     bool isInTable(std::string word);
+    void load_planets(string input);
+    void planet_search(string name);
 
   private:
     /* member functions */
     unsigned int getHash(std::string word);
-    wordItem* searchTable(std::string word);
+    planet* searchTable(std::string word);
 
     /* instance variables */
-    wordItem** hashTable;
+    planet** hashTable;
     int hashTableSize;
     int numItems;
     int numCollisions;
