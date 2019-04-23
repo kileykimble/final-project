@@ -19,3 +19,15 @@ struct Log
   string title; // just a simple struct to hold each log
   string all_data;
 };
+
+
+struct planet
+{
+    string name;
+    string radius; //in km
+    string distance; //from sun
+    string orbit_tilt;
+    string rotat_period;
+    string orbit_period;
+    string moons;
+};
