@@ -151,7 +151,7 @@ string Graph::findSeen(string id){
 			output = output + You -> Edges.at(i) -> id + "\n";
 			numSeen++;
 		}
-		else{ cout << output + You -> Edges.at(i) -> id << ":" << You -> Edges.at(i) -> Distance << endl;
+		else{ cout <<  You -> Edges.at(i) -> id << ":" << You -> Edges.at(i) -> Distance << endl;
 		}
 	}
 	if(numSeen == 0){
