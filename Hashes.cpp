@@ -93,7 +93,7 @@ void HashTable::planet_search(string name){
     planet *temp = searchTable(name);
 }
 
-void load_planets(string input)
+void HashTable::load_planets(string input)
 {
     cout << "Loading planets! .... .. . ." << endl;
     vector <string> row; //temp for each row
@@ -121,7 +121,7 @@ void load_planets(string input)
              tempP->orbit_tilt = row[6];
              tempP->rotat_period = row[10];
              tempP->orbit_period = row[11];
-             HashTable::addPlanet(tempP); //call add funtion
+             addPlanet(tempP); //call add funtion
         }
 }
 

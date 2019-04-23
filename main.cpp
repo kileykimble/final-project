@@ -139,7 +139,7 @@ int main(int argc, const char *argv[]){
   string outputName = argv[2]; //get filename
   string line = "";
   ifstream input(inputName); //create input stream
-  HashTable table(10);
+  HashTable table = HashTable(1023);
   vector <Log> all_logs; //temp for each row
   //load_logs(all_logs);
 
