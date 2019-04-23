@@ -161,7 +161,8 @@ while (choice !=4) //MENU LOOP
   cin >> celestial_choice;
  // display_planet(celestial_choice); //call the search and print function
     planet *temp;
-    table.planet_search(celestial_choice);
+    display_planet(celestial_choice);
+    //table.planet_search(celestial_choice);
   }
 
   if (choice == 2)
@@ -211,7 +212,7 @@ while (choice !=4) //MENU LOOP
   if (choice == 3)
   { //if view night sky
   cout << "Called night sky function!"<< endl;
- // nightSkyCoordinates();
+ // nightSkyCoordinates(); //uncomment this
 
   }
 

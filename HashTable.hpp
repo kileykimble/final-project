@@ -36,6 +36,7 @@ class HashTable {
     bool isInTable(std::string word);
     void load_planets(string input);
     void planet_search(string name);
+    
 
   private:
     /* member functions */
