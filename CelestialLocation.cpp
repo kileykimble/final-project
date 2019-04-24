@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <math.h>
+//#include <math.h>
+#define _USE_MATH_DEFINES // for C++
 #include <cmath>
 using namespace std;
 
@@ -106,7 +107,7 @@ void calcMercury(int date, float x, float y, float z){ // function to perform co
 	float X = helioX - earthX; // geocentric x coordinate
 	float Y = helioY - earthY; // geocentric y coordinate
 	float Z = helioZ - earthZ; // geocentric z coordinate
-	
+
 	float dist = sqrt(X*X + Y*Y + Z*Z); // distance between planet and Earth
 
 	float eclLon = atan2(Y,X); // geocentric ecliptic longitude
@@ -131,7 +132,7 @@ void calcVenus(int date, float x, float y, float z){ // function to perform coor
 	float e = 0.00677; // eccentricity of orbit
 	float i = 3.395; // ecliptic longitude of ascending node of orbit
 	float w = 54.884; // inclination of orbit - shows tilt of orbit compared to ecliptic
-	float o = 76.680; 
+	float o = 76.680;
 	float m = 50.416; // anomaly at date 0
 	float distNum = 0.72330;
 
@@ -141,7 +142,7 @@ void calcVenus(int date, float x, float y, float z){ // function to perform coor
 
 
 	float helioX = helioCoordinateX(r, o, mAnomaly, i, w);
-	float helioY = helioCoordinateY(r, o, mAnomaly, i, w); 
+	float helioY = helioCoordinateY(r, o, mAnomaly, i, w);
 	float helioZ = helioCoordinateZ(r, mAnomaly, i, w);
 
 	float X = helioX - earthX;
@@ -171,7 +172,7 @@ void calcMars(int date, float x, float y, float z){ // function to perform coord
 	float e = 0.09340; // eccentricity of orbit
 	float i = 1.850; // ecliptic longitude of ascending node of orbit
 	float w = 286.502; // inclination of orbit - shows tilt of orbit compared to ecliptic
-	float o = 49.558; 
+	float o = 49.558;
 	float m = 19.373; // anomaly at date 0
 	float distNum = 1.51039;
 
@@ -180,9 +181,9 @@ void calcMars(int date, float x, float y, float z){ // function to perform coord
 	float r = distanceToSun(distNum, e, mAnomaly); // distance to sun
 
 
-	float helioX = helioCoordinateX(r, o, mAnomaly, i, w); 
+	float helioX = helioCoordinateX(r, o, mAnomaly, i, w);
 	float helioY = helioCoordinateY(r, o, mAnomaly, i, w);
-	float helioZ = helioCoordinateZ(r, mAnomaly, i, w); 
+	float helioZ = helioCoordinateZ(r, mAnomaly, i, w);
 
 	float X = helioX - earthX;
 	float Y = helioY - earthY;
@@ -249,12 +250,12 @@ void calcSaturn(int date, float x, float y, float z){ // function to perform coo
 	float earthY = y;
 	float earthZ = z;
 	float n = 0.033371;
-	float a = 9.55491;	
-	float e = 0.05551; 
-	float i = 2.489; 
-	float w = 339.391; 
-	float o = 113.666; 
-	float m = 317.021; 
+	float a = 9.55491;
+	float e = 0.05551;
+	float i = 2.489;
+	float w = 339.391;
+	float o = 113.666;
+	float m = 317.021;
 	float distNum = 9.52547;
 
 
@@ -282,7 +283,7 @@ void calcSaturn(int date, float x, float y, float z){ // function to perform coo
     planetArr[Saturn].longitude =  RA;
     planetArr[Saturn].inclination = Dec;
 }
- 
+
 void calcUranus(int date, float x, float y, float z){ // function to perform coordinate calculations for the planet Uranus
 	// see full descriptions of function calls in calcMercury() function
 	int d = date;
@@ -294,7 +295,7 @@ void calcUranus(int date, float x, float y, float z){ // function to perform coo
 	float e = 0.04630; // eccentricity of orbit
 	float i = 0.773; // ecliptic longitude of ascending node of orbit
 	float w = 98.999; // inclination of orbit - shows tilt of orbit compared to ecliptic
-	float o = 74.006; // 
+	float o = 74.006; //
 	float m = 141.050; // anomaly at date 0
 	float distNum = 19.17725;
 
@@ -336,7 +337,7 @@ void calcNeptune(int date, float x, float y, float z){ // function to perform co
 	float e = 0.00899; // eccentricity of orbit
 	float i = 1.770; // ecliptic longitude of ascending node of orbit
 	float w = 276.340; // inclination of orbit - shows tilt of orbit compared to ecliptic
-	float o = 131.784; // 
+	float o = 131.784; //
 	float m = 256.225; // anomaly at date 0
 	float distNum = 30.10796;
 
@@ -379,7 +380,7 @@ void nightSkyCoordinates(){ // using data from http://www.stjarnhimlen.se/comp/p
 	cin >> date; // take in user date
 
   	istringstream iss(date);
- 	
+
  	getline(iss, token, '/'); // extract month from input date
   	month = stoi(token);
   	getline(iss, token, '/'); // extract day from input date
@@ -415,6 +416,6 @@ void nightSkyCoordinates(){ // using data from http://www.stjarnhimlen.se/comp/p
 }
 
 // call to night sky coordinates function
-int main(){
-	nightSkyCoordinates();
-}
+//int main(){
+	//nightSkyCoordinates();
+//}

@@ -4,8 +4,6 @@
 //g++ -std=c++11 main.cpp -o a
 //./a log.txt planet_data.txt
 
-
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,6 +13,7 @@
 #include <iomanip>
 #include "structs.hpp"
 #include "HashTable.hpp"
+#include "CelestialLocation.cpp"
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -212,7 +211,7 @@ while (choice !=4) //MENU LOOP
   if (choice == 3)
   { //if view night sky
   cout << "Called night sky function!"<< endl;
- // nightSkyCoordinates(); //uncomment this
+  nightSkyCoordinates(); //uncomment this
 
   }
 
