@@ -42,7 +42,7 @@ class HashTable {
   private:
     /* member functions */
     unsigned int getHash(std::string word);
-    planet* searchTable(std::string word,int index);
+    planet* searchTable(std::string word);
 
     /* instance variables */
     planet** hashTable;

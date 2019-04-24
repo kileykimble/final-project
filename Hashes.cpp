@@ -40,44 +40,26 @@ void HashTable::addPlanet(planet *newplanet){
 //    cout << "added planet: " << newplanet->name << endl;
 
   int index = getHash(newplanet->name) ;
-  planet* spot = hashTable[index]; //start at the head
-  planet* prev = NULL;
-  numItems++;
-
-
-  if (spot !=NULL) { //if theres something in the index already
-    numCollisions++;
-  }
-
-  while (spot != NULL) { //go to the end of the LL
-    prev = spot;
-    spot = spot->next;
-  }
-
-  if (spot == NULL) { //when its empty
-    if (prev == NULL)
-    { //if it needs to be first on the list
 
       hashTable[index] = newplanet;
 //      cout << "added planet to index: "<< index <<" name: " << newplanet->name << endl;
     //  cout << "calling view index in add function" << endl;
-      view_index(newplanet->name);
+    //  view_index(newplanet->name);
       return;
-    }
-    prev->next = newplanet;
-  }
 }
 
 
 void HashTable::view_index(string name){
-
-
-
     int index = getHash(name);
-   cout << "index in view index is "<< hashTable[index]->name<<" index is "<< index<< endl;
+   for(int i=0; i<1023; i++){
+     if(hashTable[i] != NULL){
+    //   cout << hashTable[i]->name << " "<< i << endl;
+     }
+   }
+  // cout << "index in view index is "<< hashTable[index]->name<<" index is "<< index<< endl;
 }
 
-planet* HashTable::searchTable(string word,int index){ //word == name
+planet* HashTable::searchTable(string word){ //word == name
 cout << "searching planet:  " << word << endl;
 cout << "calling view index in search function" << endl;
 view_index(word);
@@ -155,11 +137,11 @@ planet* temp;
   return NULL;
 
 }
+
 void HashTable::planet_search(string name){
-     int index = getHash(name);
      view_index(name);
-     cout << "from search function part 1" << endl;
-     searchTable(name,index);
+     //cout << "from search function part 1" << endl;
+     searchTable(name);
     //cout << "temp name 111 is " << temp->name;
 }
 
@@ -167,7 +149,6 @@ void HashTable::load_planets(string input)
 {
     cout << "Loading planets! .... .. . ." << endl;
     vector <string> row; //temp for each row
-    planet *tempP = new planet;
     string temp;
     fstream input_celestial;
     input_celestial.open("planet_data.csv",ios::in); //create input stream
@@ -188,6 +169,8 @@ void HashTable::load_planets(string input)
             row.push_back(word); //push to vector
         //    cout << "got here " << "word is: "<<word<< endl;
         }
+             planet *tempP = new planet;
+
              tempP->name = row[0];
              tempP->radius = row[1]; //add in all the data
              tempP->distance = row[4];
@@ -197,8 +180,8 @@ void HashTable::load_planets(string input)
              int index = getHash(tempP->name);
              addPlanet(tempP); //call add funtion'
 
-             cout << "calling view index" << endl;
-             view_index(tempP->name);
+            // cout << "calling view index" << endl;
+            // view_index(tempP->name);
              row.clear();
 
 
